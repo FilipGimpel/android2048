@@ -1,6 +1,7 @@
 package com.gimpel.android2048;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,10 +16,11 @@ import android.widget.TextView;
 
 
 public class GameBoardFragment extends Fragment implements onDirectionSwype {
-	// TODO three hours of sleep, two hot meals, one shower
 	private Grid mGrid;
 	private TextView mTextScore;
-	long startTime = System.currentTimeMillis();
+	private TextView mTextTime;
+	private Handler mHandler = new Handler();
+	// TODO three hours of sleep, two hot meals, one shower
 	
 	public GameBoardFragment() { }
 
@@ -35,6 +37,8 @@ public class GameBoardFragment extends Fragment implements onDirectionSwype {
 		super.onViewCreated(view, savedInstanceState);
 
 		mTextScore = (TextView) getView().findViewById(R.id.score_value);
+		mTextTime = (TextView) getView().findViewById(R.id.time_value);
+		mHandler.post(new UpdateScoreRunnable(mTextTime, mHandler));
 		
 		Util.adjustGridSize(view);
 		
@@ -50,14 +54,13 @@ public class GameBoardFragment extends Fragment implements onDirectionSwype {
 	}
 	
 	private void updateScore() {
-		TextView scoreView = (TextView) getView().findViewById(R.id.score_value);
-		scoreView.setText(mGrid.getScore());
+		mTextScore.setText(mGrid.getScore());
 	}
 	
 	private void refreshGameBoard() {
 		int newElement = mGrid.addRandom();
 		
-		if (newElement != -1) { // we can still play!
+		if (newElement != -1) {
 			RelativeLayout parent = (RelativeLayout) getView().findViewById(R.id.grid);
 			for (int i = 0; i < parent.getChildCount(); i++) {	
 				// retrieve relative layout that represents each grid element and holds textview
@@ -68,14 +71,14 @@ public class GameBoardFragment extends Fragment implements onDirectionSwype {
 				
 				if (i == newElement) {
 					Animation fadeIn = new AlphaAnimation(0, 1);
-					fadeIn.setInterpolator(new AccelerateInterpolator()); //and this
+					fadeIn.setInterpolator(new AccelerateInterpolator());
 					fadeIn.setDuration(10);
 					element.startAnimation(fadeIn);
 				}
 			}	
-		} else { // game is lost!
-//			FireMissilessDialogFragment dialog = new FireMissilessDialogFragment();
-//			dialog.show(getFragmentManager(), "TAG");
+		} else if (mGrid.isGameLost()) {
+			
+			
 			// TODO add popup! about losing
 			// TODO add score counter
 			// TODO integrate with facebook
