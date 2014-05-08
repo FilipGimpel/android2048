@@ -91,19 +91,15 @@ public class GameBoardFragment extends Fragment implements onDirectionSwype {
 		switch(direction) {
 		case UP:
 			mGrid.moveUp();
-			Log.d("SHIT","RIGHT");
 			break;
 		case DOWN:
 			mGrid.moveDown();
-			Log.d("SHIT","DOWN");
 			break;
 		case LEFT:
 			mGrid.moveLeft();
-			Log.d("SHIT","LEFT");
 			break;
 		case RIGHT:
 			mGrid.moveRight();
-			Log.d("SHIT","RIGHT");
 			break;
 		}
 		
