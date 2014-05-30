@@ -8,17 +8,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.gimpel.android2048.MainActivity$PlaceholderFragment" >
 
-    <TextView
-        android:id="@+id/text"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-    
-    <Button 
-        android:layout_below="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PLAY!"
-        android:onClick="goToGame"/>
+        android:layout_centerInParent="true" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Oldschool 2048" />
+
+        <Button
+            android:id="@+id/button_new_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:onClick="goToNewGame"
+            android:text="NEW GAME" />
+
+        <Button
+            android:id="@+id/button_resume_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_new_game"
+            android:onClick="goToResumeGame"
+            android:text="RESUME" />
+        
+		<Button
+		    android:id="@+id/button_highscores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_resume_game"
+            android:onClick="goToScores"
+            android:text="SCORES" />
+    </RelativeLayout>
 
 </RelativeLayout>

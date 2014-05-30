@@ -5,476 +5,481 @@
     android:layout_height="match_parent"
     tools:context="com.gimpel.android2048.GameActivity$PlaceholderFragment" >
 
-    <LinearLayout
-        android:id="@+id/scorebar_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/grid"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="4dp"
-        android:orientation="horizontal" >
-
-        <RelativeLayout
-            android:id="@+id/score_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/grid_background"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/score_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="SCORE:"/>
-            
-			<TextView
-			    android:id="@+id/score_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="1212"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/time_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/grid_background"
-            android:padding="10dp" >
-
-            <TextView
-                android:id="@+id/time_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="TIME:" />
-            
-			<TextView
-			    android:id="@+id/time_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="00:00:00" />
-        </RelativeLayout>
-    </LinearLayout>
-
     <RelativeLayout
-        android:id="@+id/grid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/scorebar_layout"
-        android:layout_centerInParent="true"
-        android:background="@drawable/grid_background" >
+        android:layout_centerInParent="true" >
 
-        <FrameLayout
-            android:id="@+id/frame_0_0"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/empty_tile_background" >
+        <LinearLayout
+            android:id="@+id/scorebar_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/grid"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal" >
 
             <RelativeLayout
-                android:id="@+id/grid_0_0"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="00" >
+                android:id="@+id/score_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/grid_background"
+                android:padding="10dp" >
 
                 <TextView
-                    android:id="@+id/text_0_0"
+                    android:id="@+id/score_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" />
-            </RelativeLayout>
-        </FrameLayout>
+                    android:layout_alignParentLeft="true"
+                    android:text="SCORE:" />
 
-        <FrameLayout
-            android:id="@+id/frame_1_0"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/frame_0_0"
-            android:background="@drawable/empty_tile_background" >
+                <TextView
+                    android:id="@+id/score_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="1212" />
+            </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/grid_1_0"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="10" >
+                android:id="@+id/time_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/grid_background"
+                android:padding="10dp" >
 
                 <TextView
-                    android:id="@+id/text_1_0"
+                    android:id="@+id/time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/frame_2_0"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/frame_1_0"
-            android:background="@drawable/empty_tile_background" >
-
-            <RelativeLayout
-                android:id="@+id/grid_2_0"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="20" >
+                    android:layout_alignParentLeft="true"
+                    android:text="TIME:" />
 
                 <TextView
-                    android:id="@+id/text_2_0"
+                    android:id="@+id/time_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
+                    android:layout_alignParentRight="true"
+                    android:text="00:00:00" />
             </RelativeLayout>
-        </FrameLayout>
+        </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_3_0"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@+id/frame_2_0"
-            android:background="@drawable/empty_tile_background" >
+        <RelativeLayout
+            android:id="@+id/grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scorebar_layout"
+            android:layout_centerInParent="true"
+            android:background="@drawable/grid_background" >
 
-            <RelativeLayout
-                android:id="@+id/grid_3_0"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="30" >
+            <FrameLayout
+                android:id="@+id/frame_0_0"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/empty_tile_background" >
 
-                <TextView
-                    android:id="@+id/text_3_0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                <RelativeLayout
+                    android:id="@+id/grid_0_0"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="00" >
 
-        <!-- second row -->
+                    <TextView
+                        android:id="@+id/text_0_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" />
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_0_1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_0"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/empty_tile_background" >
+            <FrameLayout
+                android:id="@+id/frame_1_0"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/frame_0_0"
+                android:background="@drawable/empty_tile_background" >
 
-            <RelativeLayout
-                android:id="@+id/grid_0_1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="01" >
+                <RelativeLayout
+                    android:id="@+id/grid_1_0"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="10" >
 
-                <TextView
-                    android:id="@+id/text_0_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                    <TextView
+                        android:id="@+id/text_1_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_1_1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_0"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/frame_0_1"
-            android:background="@drawable/empty_tile_background" >
+            <FrameLayout
+                android:id="@+id/frame_2_0"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/frame_1_0"
+                android:background="@drawable/empty_tile_background" >
 
-            <RelativeLayout
-                android:id="@+id/grid_1_1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="11" >
+                <RelativeLayout
+                    android:id="@+id/grid_2_0"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="20" >
 
-                <TextView
-                    android:id="@+id/text_1_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                    <TextView
+                        android:id="@+id/text_2_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_2_1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_0"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/frame_1_1"
-            android:background="@drawable/empty_tile_background" >
+            <FrameLayout
+                android:id="@+id/frame_3_0"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toRightOf="@+id/frame_2_0"
+                android:background="@drawable/empty_tile_background" >
 
-            <RelativeLayout
-                android:id="@+id/grid_2_1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="12" >
+                <RelativeLayout
+                    android:id="@+id/grid_3_0"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="30" >
 
-                <TextView
-                    android:id="@+id/text_2_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                    <TextView
+                        android:id="@+id/text_3_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_3_1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_0"
-            android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@+id/frame_2_1"
-            android:background="@drawable/empty_tile_background" >
+            <!-- second row -->
 
-            <RelativeLayout
-                android:id="@+id/grid_3_1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="13" >
+            <FrameLayout
+                android:id="@+id/frame_0_1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_0"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/empty_tile_background" >
 
-                <TextView
-                    android:id="@+id/text_3_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                <RelativeLayout
+                    android:id="@+id/grid_0_1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="01" >
 
-        <!-- third row -->
+                    <TextView
+                        android:id="@+id/text_0_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_0_2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_1"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/empty_tile_background" >
+            <FrameLayout
+                android:id="@+id/frame_1_1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_0"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/frame_0_1"
+                android:background="@drawable/empty_tile_background" >
 
-            <RelativeLayout
-                android:id="@+id/grid_0_2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="20" >
+                <RelativeLayout
+                    android:id="@+id/grid_1_1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="11" >
 
-                <TextView
-                    android:id="@+id/text_0_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                    <TextView
+                        android:id="@+id/text_1_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_1_2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_1"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/frame_0_2"
-            android:background="@drawable/empty_tile_background" >
+            <FrameLayout
+                android:id="@+id/frame_2_1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_0"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/frame_1_1"
+                android:background="@drawable/empty_tile_background" >
 
-            <RelativeLayout
-                android:id="@+id/grid_1_2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="21" >
+                <RelativeLayout
+                    android:id="@+id/grid_2_1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="12" >
 
-                <TextView
-                    android:id="@+id/text_1_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                    <TextView
+                        android:id="@+id/text_2_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_2_2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_1"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/frame_1_2"
-            android:background="@drawable/empty_tile_background" >
+            <FrameLayout
+                android:id="@+id/frame_3_1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_0"
+                android:layout_marginBottom="10dp"
+                android:layout_toRightOf="@+id/frame_2_1"
+                android:background="@drawable/empty_tile_background" >
 
-            <RelativeLayout
-                android:id="@+id/grid_2_2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="22" >
+                <RelativeLayout
+                    android:id="@+id/grid_3_1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="13" >
 
-                <TextView
-                    android:id="@+id/text_2_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                    <TextView
+                        android:id="@+id/text_3_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_3_2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_1"
-            android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@+id/frame_2_2"
-            android:background="@drawable/empty_tile_background" >
+            <!-- third row -->
 
-            <RelativeLayout
-                android:id="@+id/grid_3_2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="23" >
+            <FrameLayout
+                android:id="@+id/frame_0_2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_1"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/empty_tile_background" >
 
-                <TextView
-                    android:id="@+id/text_3_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                <RelativeLayout
+                    android:id="@+id/grid_0_2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="20" >
 
-        <!-- fourth row -->
+                    <TextView
+                        android:id="@+id/text_0_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_0_3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_2"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/empty_tile_background" >
+            <FrameLayout
+                android:id="@+id/frame_1_2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_1"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/frame_0_2"
+                android:background="@drawable/empty_tile_background" >
 
-            <RelativeLayout
-                android:id="@+id/grid_0_3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="30" >
+                <RelativeLayout
+                    android:id="@+id/grid_1_2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="21" >
 
-                <TextView
-                    android:id="@+id/text_0_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                    <TextView
+                        android:id="@+id/text_1_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_1_3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_2"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/frame_0_3"
-            android:background="@drawable/empty_tile_background" >
+            <FrameLayout
+                android:id="@+id/frame_2_2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_1"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/frame_1_2"
+                android:background="@drawable/empty_tile_background" >
 
-            <RelativeLayout
-                android:id="@+id/grid_1_3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="31" >
+                <RelativeLayout
+                    android:id="@+id/grid_2_2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="22" >
 
-                <TextView
-                    android:id="@+id/text_1_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                    <TextView
+                        android:id="@+id/text_2_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_2_3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_2"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/frame_1_2"
-            android:background="@drawable/empty_tile_background" >
+            <FrameLayout
+                android:id="@+id/frame_3_2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_1"
+                android:layout_marginBottom="10dp"
+                android:layout_toRightOf="@+id/frame_2_2"
+                android:background="@drawable/empty_tile_background" >
 
-            <RelativeLayout
-                android:id="@+id/grid_2_3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="32" >
+                <RelativeLayout
+                    android:id="@+id/grid_3_2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="23" >
 
-                <TextView
-                    android:id="@+id/text_2_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                    <TextView
+                        android:id="@+id/text_3_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_3_3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/frame_0_2"
-            android:layout_toRightOf="@+id/frame_2_2"
-            android:background="@drawable/empty_tile_background" >
+            <!-- fourth row -->
 
-            <RelativeLayout
-                android:id="@+id/grid_3_3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#ffffff"
-                android:tag="33" >
+            <FrameLayout
+                android:id="@+id/frame_0_3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_2"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/empty_tile_background" >
 
-                <TextView
-                    android:id="@+id/text_3_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
+                <RelativeLayout
+                    android:id="@+id/grid_0_3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="30" >
+
+                    <TextView
+                        android:id="@+id/text_0_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_1_3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_2"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/frame_0_3"
+                android:background="@drawable/empty_tile_background" >
+
+                <RelativeLayout
+                    android:id="@+id/grid_1_3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="31" >
+
+                    <TextView
+                        android:id="@+id/text_1_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_2_3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_2"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/frame_1_2"
+                android:background="@drawable/empty_tile_background" >
+
+                <RelativeLayout
+                    android:id="@+id/grid_2_3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="32" >
+
+                    <TextView
+                        android:id="@+id/text_2_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_3_3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/frame_0_2"
+                android:layout_toRightOf="@+id/frame_2_2"
+                android:background="@drawable/empty_tile_background" >
+
+                <RelativeLayout
+                    android:id="@+id/grid_3_3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:tag="33" >
+
+                    <TextView
+                        android:id="@+id/text_3_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" >
+                    </TextView>
+                </RelativeLayout>
+            </FrameLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

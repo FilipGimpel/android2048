@@ -1,25 +1,28 @@
 package com.gimpel.android2048;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gimpel.android2048.database.SavedGame;
+import com.gimpel.android2048.database.SavedGamesManager;
 
-public class GameBoardFragment extends Fragment implements onDirectionSwype {
+
+public class GameBoardFragment extends Fragment implements FragmentCallback {
 	private Grid mGrid;
 	private TextView mTextScore;
 	private TextView mTextTime;
 	private Handler mHandler = new Handler();
+	private SavedGamesManager mGamesManager;
 	// TODO three hours of sleep, two hot meals, one shower
 	
 	public GameBoardFragment() { }
@@ -39,6 +42,7 @@ public class GameBoardFragment extends Fragment implements onDirectionSwype {
 		mTextScore = (TextView) getView().findViewById(R.id.score_value);
 		mTextTime = (TextView) getView().findViewById(R.id.time_value);
 		mHandler.post(new UpdateScoreRunnable(mTextTime, mHandler));
+		mGamesManager = new SavedGamesManager(getActivity());
 		
 		Util.adjustGridSize(view);
 		
@@ -54,7 +58,21 @@ public class GameBoardFragment extends Fragment implements onDirectionSwype {
 	}
 	
 	private void updateScore() {
-		mTextScore.setText(mGrid.getScore());
+		mTextScore.setText(String.valueOf(mGrid.getScore()));
+	}
+	
+	public SavedGame getSavedGame() {
+		// Load bitmap from view and save it to internal storage
+		RelativeLayout grid = (RelativeLayout) getView().findViewById(R.id.grid);
+		Bitmap b = Util.loadBitmapFromView(grid);
+		String uri = Util.saveBitmap(b, getActivity());
+		
+		SavedGame game = new SavedGame();
+		game.setGameState(mGrid.getGameState());
+		game.setScore(mGrid.getScore());
+		game.setUriToImage(uri);
+		
+		return game;
 	}
 	
 	private void refreshGameBoard() {
@@ -70,14 +88,14 @@ public class GameBoardFragment extends Fragment implements onDirectionSwype {
 				Util.updateElement(element, mGrid.getElementAt(i), getActivity());
 				
 				if (i == newElement) {
-					Animation fadeIn = new AlphaAnimation(0, 1);
-					fadeIn.setInterpolator(new AccelerateInterpolator());
-					fadeIn.setDuration(10);
+					Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.add_new_element); 
+					//fadeIn.setInterpolator(new AccelerateInterpolator());
 					element.startAnimation(fadeIn);
 				}
-			}	
+			}
 		} else if (mGrid.isGameLost()) {
 			
+
 			
 			// TODO add popup! about losing
 			// TODO add score counter
@@ -104,5 +122,17 @@ public class GameBoardFragment extends Fragment implements onDirectionSwype {
 		}
 		
 		animateView();
+	}
+
+	@Override
+	public void onBackKeyPressed() {
+		
+		RelativeLayout grid = (RelativeLayout) getView().findViewById(R.id.grid);
+		
+		if (!mGrid.isGameLost()) {
+			SaveGameDialog dialog = new SaveGameDialog();
+			dialog.show(getFragmentManager(), "SAVEGAME?");		
+		}
+
 	}
 }

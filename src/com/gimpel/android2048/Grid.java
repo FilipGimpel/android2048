@@ -21,12 +21,19 @@ public class Grid {
 			}
 		}
 		
+//		mArray = new int[][]{
+//				{ 2, 4, 8, 16 },
+//				{ 16, 8, 4, 2 },
+//				{ 2, 4, 8, 16 },
+//				{ 0, 8, 4, 2 }
+//		};
+		
 		addRandom();
 		addRandom();
 	}
 	
-	public String getScore() {
-		return String.valueOf(mScore);
+	public int getScore() {
+		return mScore;
 	}
 	
 	private List<Point> getEmptyElements() {
@@ -41,6 +48,21 @@ public class Grid {
 		}
 		
 		return emptyElements;
+	}
+	
+	public String getGameState() {
+		StringBuilder builder = new StringBuilder();
+		
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				builder.append(mArray[i][j] + ",");
+				
+			}
+		}
+		
+		// remove last comma
+		builder.setLength(builder.length() - 1);
+		return builder.toString();
 	}
 	
 	/**
