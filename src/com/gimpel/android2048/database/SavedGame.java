@@ -6,13 +6,15 @@ public class SavedGame {
 	private String mPlayerName;
 	private String mUriToImage;
 	private String mGameState;
+	private String mTime;
 	private int mScore;
 	
-	public SavedGame(int ID, String playerName, String uriToImage, String gameState, int score) {
+	public SavedGame(int ID, String playerName, String uriToImage, String gameState, String time, int score) {
 		mID = ID;
 		mPlayerName = playerName;
 		mUriToImage = uriToImage;
 		mGameState = gameState;
+		mTime = time;
 		mScore = score;
 	}
 	
@@ -47,5 +49,13 @@ public class SavedGame {
 	}
 	public void setScore(int score) {
 		mScore = score;
+	}
+
+	public String getTime() {
+		return mTime;
+	}
+
+	public void setTime(String time) {
+		mTime = time;
 	}
 }

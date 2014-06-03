@@ -34,6 +34,12 @@ public class GameBoardActivity extends FragmentActivity implements SaveGameDialo
 		// Initialize gameBoardFragment and register callback 
 		GameBoardFragment gameBoard = new GameBoardFragment();
 		mFragmentCallback = gameBoard;
+		
+		// Optionally pass argument to fragment (savedGameState)
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+		    gameBoard.setArguments(extras);
+		}
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -112,11 +118,15 @@ public class GameBoardActivity extends FragmentActivity implements SaveGameDialo
 			String date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.UK).format(new Date());
 			String defaultName = String.format("%s%s", date, game.getScore());
 			game.setPlayerName(defaultName);
+		} else {
+			game.setPlayerName(userInput);	
 		}
 		
 		game.setID(game.getPlayerName().hashCode());
 		
 		SavedGamesManager manager = new SavedGamesManager(this);
 		manager.addSavedGame(game);
+		finish();
+		overridePendingTransition( R.anim.left_in, R.anim.right_out );
 	}
 }

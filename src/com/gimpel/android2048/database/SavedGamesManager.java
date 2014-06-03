@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class SavedGamesManager extends SQLiteOpenHelper {
 	/* All Static variables */
@@ -22,6 +23,7 @@ public class SavedGamesManager extends SQLiteOpenHelper {
     private static final String KEY_PLAYER_NAME = "player_name";
     private static final String KEY_IMAGE_URI = "image_uri";
     private static final String KEY_GAME_STATE = "game_state";
+    private static final String KEY_ELAPSED_TIME = "elapsed_time";
     private static final String KEY_SCORE = "score";
     
     // TODO log all db queries 
@@ -37,9 +39,12 @@ public class SavedGamesManager extends SQLiteOpenHelper {
                 + KEY_ID + " INTEGER PRIMARY KEY,"
         		+ KEY_PLAYER_NAME + " TEXT,"
                 + KEY_IMAGE_URI + " TEXT,"
-        		+ KEY_GAME_STATE + " TEXT," 
-        		+ KEY_SCORE + " INTEGER" 
+        		+ KEY_GAME_STATE + " TEXT,"
+        		+ KEY_ELAPSED_TIME + " TEXT,"
+        		+ KEY_SCORE + " TEXT" 
         + ")";
+        
+        Log.d("DB_QUERY", CREATE_CONTACTS_TABLE);
         
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
@@ -56,11 +61,14 @@ public class SavedGamesManager extends SQLiteOpenHelper {
     public void addSavedGame(SavedGame game) {
     	SQLiteDatabase db = this.getWritableDatabase();
     	 
+    	Log.d("GIMPELLI", String.valueOf(game.getScore()));
+    	
         ContentValues values = new ContentValues();
         values.put(KEY_PLAYER_NAME, game.getPlayerName());
         values.put(KEY_IMAGE_URI, game.getUriToImage());
         values.put(KEY_GAME_STATE, game.getGameState());
-        values.put(KEY_SCORE, game.getScore());
+        values.put(KEY_SCORE, String.valueOf(game.getScore()));
+        values.put(KEY_ELAPSED_TIME, game.getTime());
      
         // Inserting Row
         db.insert(TABLE_GAMES, null, values);
@@ -75,6 +83,7 @@ public class SavedGamesManager extends SQLiteOpenHelper {
                 KEY_PLAYER_NAME,
                 KEY_IMAGE_URI,
                 KEY_GAME_STATE,
+                KEY_ELAPSED_TIME,
                 KEY_SCORE }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         
@@ -86,6 +95,7 @@ public class SavedGamesManager extends SQLiteOpenHelper {
                 cursor.getString(1),
                 cursor.getString(2),
                 cursor.getString(3),
+                cursor.getString(4),
                 Integer.parseInt(cursor.getString(4)));
         
         return contact;
@@ -107,6 +117,8 @@ public class SavedGamesManager extends SQLiteOpenHelper {
                 contact.setPlayerName(cursor.getString(1));
                 contact.setUriToImage(cursor.getString(2));
                 contact.setGameState(cursor.getString(3));
+                contact.setTime(cursor.getString(4));
+                contact.setScore(Integer.parseInt(cursor.getString(5)));
                 contact.setID(Integer.parseInt(cursor.getString(0)));
                 /* Adding contact to list */
                 contactList.add(contact);

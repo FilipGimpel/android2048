@@ -36,13 +36,13 @@
             android:onClick="goToResumeGame"
             android:text="RESUME" />
         
-		<Button
+<!-- 		<Button
 		    android:id="@+id/button_highscores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button_resume_game"
             android:onClick="goToScores"
-            android:text="SCORES" />
+            android:text="SCORES" /> -->
     </RelativeLayout>
 
 </RelativeLayout>

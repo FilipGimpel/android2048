@@ -1,5 +1,6 @@
 package com.gimpel.android2048;
 
+import java.security.spec.MGF1ParameterSpec;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,19 +22,24 @@ public class Grid {
 			}
 		}
 		
-//		mArray = new int[][]{
-//				{ 2, 4, 8, 16 },
-//				{ 16, 8, 4, 2 },
-//				{ 2, 4, 8, 16 },
-//				{ 0, 8, 4, 2 }
-//		};
-		
 		addRandom();
 		addRandom();
 	}
 	
+	public void loadState(String gameState) {
+		String[] values = gameState.split(",");
+		
+		for(int i = 0; i < values.length ; i++) {
+			mArray[i/4][i%4] = Integer.valueOf(values[i]);
+		}
+	}
+	
 	public int getScore() {
 		return mScore;
+	}
+	
+	public void setScore(int score) {
+		mScore = score;
 	}
 	
 	private List<Point> getEmptyElements() {

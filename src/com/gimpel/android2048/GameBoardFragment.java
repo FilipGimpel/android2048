@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gimpel.android2048.database.SavedGame;
-import com.gimpel.android2048.database.SavedGamesManager;
 
 
 public class GameBoardFragment extends Fragment implements FragmentCallback {
@@ -22,7 +21,10 @@ public class GameBoardFragment extends Fragment implements FragmentCallback {
 	private TextView mTextScore;
 	private TextView mTextTime;
 	private Handler mHandler = new Handler();
-	private SavedGamesManager mGamesManager;
+	private UpdateScoreRunnable mRunnable;
+	private String mSavedGameState;
+	private String mSavedTime;
+	private String mSavedScore;
 	// TODO three hours of sleep, two hot meals, one shower
 	
 	public GameBoardFragment() { }
@@ -32,6 +34,13 @@ public class GameBoardFragment extends Fragment implements FragmentCallback {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_game, container,
 				false);
+
+		if (getArguments() != null) {
+		    mSavedGameState = getArguments().getString(SavedGamesFragment.SAVED_GAME_INTENT_TAG);
+		    mSavedScore = getArguments().getString(SavedGamesFragment.SCORE_INTENT_TAG);
+		    mSavedTime = getArguments().getString(SavedGamesFragment.ELAPSED_TIME_INTENT_TAG);
+		}
+		
 		return rootView;
 	}
 
@@ -41,15 +50,25 @@ public class GameBoardFragment extends Fragment implements FragmentCallback {
 
 		mTextScore = (TextView) getView().findViewById(R.id.score_value);
 		mTextTime = (TextView) getView().findViewById(R.id.time_value);
-		mHandler.post(new UpdateScoreRunnable(mTextTime, mHandler));
-		mGamesManager = new SavedGamesManager(getActivity());
+		
 		
 		Util.adjustGridSize(view);
-		
 		mGrid = new Grid();
-		mGrid.addRandom();
-		mGrid.addRandom();
-		refreshGameBoard();
+		
+		if (mSavedGameState != null) {
+			mGrid.loadState(mSavedGameState);
+			mRunnable = new UpdateScoreRunnable(mTextTime, mHandler, Long.valueOf(mSavedTime));
+			mTextScore.setText(mSavedScore);
+			mGrid.setScore(Integer.valueOf(mSavedScore));
+		} else {
+			mRunnable = new UpdateScoreRunnable(mTextTime, mHandler);
+			mGrid.addRandom();
+			mGrid.addRandom();
+		}
+		
+		
+		mHandler.post(mRunnable);
+		refreshGameBoard();			
 	}
 	
 	private void animateView() {
@@ -70,6 +89,7 @@ public class GameBoardFragment extends Fragment implements FragmentCallback {
 		SavedGame game = new SavedGame();
 		game.setGameState(mGrid.getGameState());
 		game.setScore(mGrid.getScore());
+		game.setTime(String.valueOf(mRunnable.getMilis()));
 		game.setUriToImage(uri);
 		
 		return game;
@@ -126,9 +146,6 @@ public class GameBoardFragment extends Fragment implements FragmentCallback {
 
 	@Override
 	public void onBackKeyPressed() {
-		
-		RelativeLayout grid = (RelativeLayout) getView().findViewById(R.id.grid);
-		
 		if (!mGrid.isGameLost()) {
 			SaveGameDialog dialog = new SaveGameDialog();
 			dialog.show(getFragmentManager(), "SAVEGAME?");		
