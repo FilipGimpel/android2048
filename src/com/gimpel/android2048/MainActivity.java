@@ -49,6 +49,7 @@ public class MainActivity extends FragmentActivity {
 	
 	public void goToResumeGame(View v) {
 		Intent k = new Intent(MainActivity.this, SavedGamesActivity.class);
+		k.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 	    startActivity(k);
 	    overridePendingTransition( R.anim.right_in, R.anim.left_out );
 	}

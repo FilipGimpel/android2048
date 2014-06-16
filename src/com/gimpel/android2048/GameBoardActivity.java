@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
@@ -13,10 +14,11 @@ import android.view.MotionEvent;
 import com.gimpel.android2048.FragmentCallback.Direction;
 import com.gimpel.android2048.SaveGameDetailDialog.SaveGameDetailDialogListener;
 import com.gimpel.android2048.SaveGameDialog.SaveGameDialogListener;
-import com.gimpel.android2048.database.SavedGame;
-import com.gimpel.android2048.database.SavedGamesManager;
+import com.gimpel.android2048.database.Game;
+import com.gimpel.android2048.database.DatabaseHelper;
+import com.gimpel.android2048.dialogs.GameOverDialog.GameOverDialogListener;
 
-public class GameBoardActivity extends FragmentActivity implements SaveGameDialogListener, SaveGameDetailDialogListener {
+public class GameBoardActivity extends FragmentActivity implements SaveGameDialogListener, SaveGameDetailDialogListener, GameOverDialogListener {
 	// Callback to GameBoard fragment for passing swype events
 	private FragmentCallback mFragmentCallback;
 
@@ -25,7 +27,9 @@ public class GameBoardActivity extends FragmentActivity implements SaveGameDialo
 	private int mStartTouchEventY;
 	private int mMinimalTouchEventLenght;
 	
-
+	// if current game was restored from database
+	private Game mLoadedGame;	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,6 +42,7 @@ public class GameBoardActivity extends FragmentActivity implements SaveGameDialo
 		// Optionally pass argument to fragment (savedGameState)
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
+			mLoadedGame = extras.getParcelable(SavedGamesFragment.LOADED_GAME_TAG);
 		    gameBoard.setArguments(extras);
 		}
 
@@ -100,8 +105,23 @@ public class GameBoardActivity extends FragmentActivity implements SaveGameDialo
 	
 	@Override
 	public void onSaveGameDialogPositiveClick() {
-		SaveGameDetailDialog dialog = new SaveGameDetailDialog();
-		dialog.show(getSupportFragmentManager(), "SAVEGAMEDETAIL");	
+		if (mLoadedGame != null) {
+			DatabaseHelper manager = new DatabaseHelper(getApplicationContext());
+			// delete old game state
+			manager.deleteSavedGame(mLoadedGame);
+			
+			// update old game state and save to database
+			Game game = ((GameBoardFragment)mFragmentCallback).getCurrentGame();
+			game.setPlayerName(mLoadedGame.getPlayerName());
+			manager.addSavedGame(game);
+		
+			// finish activity
+			finish();
+		    overridePendingTransition( R.anim.left_in, R.anim.right_out );
+		} else {
+			SaveGameDetailDialog dialog = new SaveGameDetailDialog();
+			dialog.show(getSupportFragmentManager(), "SAVEGAMEDETAIL");	
+		}
 	}
 
 	@Override
@@ -112,7 +132,7 @@ public class GameBoardActivity extends FragmentActivity implements SaveGameDialo
 
 	@Override
 	public void onSaveGameDetailDialogPositiveClick(String userInput) {
-		SavedGame game = ((GameBoardFragment)mFragmentCallback).getSavedGame();
+		Game game = ((GameBoardFragment)mFragmentCallback).getCurrentGame();
 		
 		if (userInput.equals("")) { // if user supplied no name, we set it to default
 			String date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.UK).format(new Date());
@@ -124,8 +144,18 @@ public class GameBoardActivity extends FragmentActivity implements SaveGameDialo
 		
 		game.setID(game.getPlayerName().hashCode());
 		
-		SavedGamesManager manager = new SavedGamesManager(this);
+		DatabaseHelper manager = new DatabaseHelper(this);
 		manager.addSavedGame(game);
+		finish();
+		overridePendingTransition( R.anim.left_in, R.anim.right_out );
+	}
+
+	@Override
+	public void onGameOverDismissClick(boolean isHigshScore) {
+		if (isHigshScore) {
+			((GameBoardFragment)mFragmentCallback).AddCurrentGameToHighScores();
+		}
+		
 		finish();
 		overridePendingTransition( R.anim.left_in, R.anim.right_out );
 	}

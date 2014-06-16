@@ -16,14 +16,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gimpel.android2048.database.SavedGame;
+import com.gimpel.android2048.database.Game;
 
 public class SavedGamesAdapter extends BaseAdapter {
 	Context mContext;
-	List<SavedGame> mGames;
+	List<Game> mGames;
     private static LayoutInflater mInflater = null;
 
-    public SavedGamesAdapter(Context context, List<SavedGame> data) {
+    public SavedGamesAdapter(Context context, List<Game> data) {
         this.mContext = context;
         this.mGames = data;
         mInflater = (LayoutInflater) context

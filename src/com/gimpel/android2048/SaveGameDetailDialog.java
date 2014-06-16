@@ -48,6 +48,7 @@ public class SaveGameDetailDialog extends DialogFragment {
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(view)
 	    // Add action buttons
+	    	   .setTitle("SAVE")
 	           .setPositiveButton(/*R.string.signin*/"OK", new DialogInterface.OnClickListener() {
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
@@ -64,5 +65,12 @@ public class SaveGameDetailDialog extends DialogFragment {
 //	           });  
 	    
 	    return builder.create();
+	}
+	
+	@Override
+	public void onDismiss(DialogInterface dialog) {
+		super.onDismiss(dialog);
+		
+		
 	}
 }

@@ -8,6 +8,7 @@ public class UpdateScoreRunnable implements Runnable {
 	private long mStartTime;
 	private Handler mHandler;
 	private long mCurrentMilis;
+	private boolean mRunning = true;
 	
 	public UpdateScoreRunnable(TextView scoreTextView, Handler handler) {
 		mScoreTextView = scoreTextView;
@@ -38,9 +39,13 @@ public class UpdateScoreRunnable implements Runnable {
 		
 
 		mScoreTextView.setText(timeString);
-		mHandler.postDelayed(this, 30);
+		if (mRunning) mHandler.postDelayed(this, 30);
 	}
 
+	public void stop() {
+		mRunning = false;
+	}
+	
 	public long getMilis() {
 		return mCurrentMilis;
 	}

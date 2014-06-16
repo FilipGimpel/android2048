@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcel;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,20 +18,18 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.gimpel.android2048.database.SavedGame;
-import com.gimpel.android2048.database.SavedGamesManager;
+import com.gimpel.android2048.database.Game;
+import com.gimpel.android2048.database.DatabaseHelper;
 
 public class SavedGamesFragment extends Fragment {
-	private SavedGamesManager mSavedGamesManager;
+	private DatabaseHelper mSavedGamesManager;
 	private SavedGamesAdapter mAdapter;
-	private List<SavedGame> mGamesList;
+	private List<Game> mGamesList;
 	private ListView mListView;
-	private SavedGame mLastRemovedGame;
+	private Game mLastRemovedGame;
 	private boolean shouldRestoreOnBack = false;
 	private int selectedRow;
-	public static final String SAVED_GAME_INTENT_TAG = "SAVED_GAME_STATE";
-	public static final String SCORE_INTENT_TAG = "SCORE";
-	public static final String ELAPSED_TIME_INTENT_TAG = "ELAPSED_TIME";
+	public static final String LOADED_GAME_TAG = "LOADED_GAME_TAG";
 	
 	public SavedGamesFragment() { }
 
@@ -47,7 +46,7 @@ public class SavedGamesFragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		
-		mSavedGamesManager = new SavedGamesManager(getActivity());
+		mSavedGamesManager = new DatabaseHelper(getActivity());
 		mGamesList = mSavedGamesManager.getAllSavedGames();
 		mAdapter = new SavedGamesAdapter(getActivity(), mGamesList);
 		
@@ -59,13 +58,9 @@ public class SavedGamesFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				SavedGame game = mGamesList.get(position);
-				String savedGameState = game.getGameState();
-				
+				Game game = mGamesList.get(position);
 				Intent k = new Intent(getActivity(), GameBoardActivity.class);
-				k.putExtra(SAVED_GAME_INTENT_TAG, savedGameState);
-				k.putExtra(SCORE_INTENT_TAG, String.valueOf(game.getScore()));
-				k.putExtra(ELAPSED_TIME_INTENT_TAG, game.getTime());
+				k.putExtra(LOADED_GAME_TAG, game);
 			    startActivity(k);
 			    getActivity().overridePendingTransition( R.anim.right_in, R.anim.left_out );
 			}
@@ -93,7 +88,7 @@ public class SavedGamesFragment extends Fragment {
 				int position, long id) {
 					view.startAnimation(mRemoveItemAnimation);
 					selectedRow = position;
-			return false;
+			return true;
 		}		
 	}
 	
@@ -133,6 +128,7 @@ public class SavedGamesFragment extends Fragment {
 
     	        @Override
     	        public void run() {
+    	        	mSavedGamesManager.deleteSavedGame(mLastRemovedGame);
     	            shouldRestoreOnBack = false;                     
     	        }
     	    }, TIME_TO_REMOVE);

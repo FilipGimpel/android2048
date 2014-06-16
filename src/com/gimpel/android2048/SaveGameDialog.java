@@ -34,7 +34,8 @@ public class SaveGameDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Do you want to save??")
+        builder.setTitle("SAVE")
+        	   .setMessage("Do you want to save??")
                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                 	   mListener.onSaveGameDialogPositiveClick();
@@ -48,4 +49,10 @@ public class SaveGameDialog extends DialogFragment {
         
         return builder.create();
     }
+	
+	@Override
+	public void onDismiss(DialogInterface dialog) {
+		//mListener.onSaveGameDialogNegativeClick();
+		super.onDismiss(dialog);
+	}
 }
