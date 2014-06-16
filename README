@@ -1,0 +1,7 @@
+Apk file: https://drive.google.com/file/d/0BxEaRHxSUd6_NlZFMFJ3Vk9YQ0U/edit?usp=sharing
+
+Screenshots:
+ https://github.com/FilipGimpel/android2048/raw/master/screen.png
+ https://github.com/FilipGimpel/android2048/raw/master/saved_games.png
+
+ Simple android implementation of 2048. It uses standard android view and animations, no external graphics frameworks. Games can be saved to database. DB operations are not asynchronous (project still in development)
